@@ -26,8 +26,9 @@
         ido-ubiquitous
         auto-complete
         highlight-parentheses
-        yasnippet-snippets
         yasnippet
+        yasnippet-snippets
+        multiple-cursors
         autopair))
 (el-get 'sync recipes)
 (el-get 'wait)
@@ -94,6 +95,9 @@
   (setq mouse-sel-mode t)
   )
 
+;; Server: Open files in server with `emacsclient <filename>`
+(server-start)
+
 ;; Highlight current line
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#3e4446")
@@ -141,8 +145,23 @@
 ;;                                (concat system-dir (file-name-as-directory "snippets"))
 ;;                                (concat base-dir (file-name-as-directory "snippets"))
 ;;                                (concat user-emacs-directory (file-name-as-directory "el-get/yasnippet/snippets"))))
-;; (yas-global-mode 1)
+
+(yas-global-mode 1)
+
+(cua-mode t)
 
 ;; Keybindings
 (global-set-key "\M-r" 'replace-string)
 (global-set-key "\C-l" 'goto-line)
+(global-set-key (kbd "<M-up>") 'beginning-of-buffer)
+(global-set-key (kbd "<M-down>") 'end-of-buffer)
+
+;; Font type (X Emacs on Mac OS X);;(set-face-attribute 'default nil
+;;                :family "DejaVu Sans Mono for Powerline" :height 135 :weight 'normal)
+
+(set-face-attribute 'default nil
+                :family "DejaVu Sans Mono for Powerline" :height 125 :weight 'normal)
+
+;; Let's Emacs X can read env variables from PATH
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
