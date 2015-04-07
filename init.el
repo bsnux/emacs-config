@@ -4,6 +4,11 @@
 ;;   Configuration file for Emacs running on Mac OS X
 ;;--------------------------------------------------------
 
+
+;;; Commentary:
+
+;;; Code:
+
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
@@ -29,6 +34,9 @@
         yasnippet
         yasnippet-snippets
         multiple-cursors
+        darcula-theme
+        fill-column-indicator
+        undo-tree
         autopair))
 (el-get 'sync recipes)
 (el-get 'wait)
@@ -36,9 +44,23 @@
 (require 'color-theme)
 (color-theme-initialize)
 (setq color-theme-is-global t)
-(color-theme-railscasts)
+;;(color-theme-railscasts)
+(require 'darcula-theme)
+
+(require 'fill-column-indicator)
+(setq-default fill-column 80)
+(setq fci-rule-use-dashes t)
+(setq fci-rule-color "#616161")
+(add-hook 'after-change-major-mode-hook 'fci-mode)
 
 (setq initial-scratch-message ";; scratch buffer: Lisp evaluation & draft notes")
+
+;; Undo tree mode
+(require 'undo-tree)
+(global-undo-tree-mode 1)
+(defalias 'redo 'undo-tree-redo)
+(global-set-key (kbd "<M-z>") 'undo)
+(global-set-key (kbd "<M-y>") 'redo)
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -80,6 +102,9 @@
 (setq whitespace-style '(empty tabs lines-tail trailing))
 (global-whitespace-mode t)
 (add-hook 'before-save-hook 'whitespace-cleanup)
+;; Show and delete trailing whitespace (on save)
+(setq-default show-trailing-whitespace t)
+(setq default-indicate-empty-lines t)
 
 ;; Enable mouse support
 (unless window-system
@@ -102,6 +127,9 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#3e4446")
 
+;; Soft wrap
+(global-visual-line-mode 1)
+
 ;; Automatically re-visiting the file in current buffer when it was
 ;; modified by an external program
 (global-auto-revert-mode 1)
@@ -114,10 +142,6 @@
           (save-buffers-kill-terminal)
         (save-buffers-kill-emacs))
     (message "Canceled exit")))
-
-;; Show and delete trailing whitespace (on save)
-(setq-default show-trailing-whitespace t)
-(setq default-indicate-empty-lines t)
 
 ;; follow symlinks and don't ask
 (setq vc-follow-symlinks t)
@@ -153,6 +177,7 @@
 ;; Keybindings
 (global-set-key "\M-r" 'replace-string)
 (global-set-key "\C-l" 'goto-line)
+(global-set-key "\M-j" 'join-line)
 (global-set-key (kbd "<M-up>") 'beginning-of-buffer)
 (global-set-key (kbd "<M-down>") 'end-of-buffer)
 
