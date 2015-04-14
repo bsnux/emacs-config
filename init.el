@@ -37,9 +37,14 @@
         darcula-theme
         fill-column-indicator
         undo-tree
+        markdown-mode
+        markdown-preview-mode
+        evil
         autopair))
 (el-get 'sync recipes)
 (el-get 'wait)
+
+(evil-mode 1)
 
 (require 'color-theme)
 (color-theme-initialize)
