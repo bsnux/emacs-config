@@ -46,6 +46,8 @@
         haskell-mode
         color-theme-zenburn
         solarized-emacs
+        editorconfig
+        tramp
         autopair))
 (el-get 'sync recipes)
 (el-get 'wait)
@@ -292,4 +294,7 @@
 (define-key evil-normal-state-map "\C-p" 'evil-previous-line)
 (define-key evil-insert-state-map "\C-p" 'evil-previous-line)
 (define-key evil-visual-state-map "\C-p" 'evil-previous-line)
+
+;; editorconfig
+(load "editorconfig")
 ;;; init.el ends here
