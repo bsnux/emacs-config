@@ -48,6 +48,8 @@
         solarized-emacs
         editorconfig
         tramp
+        rst-mode
+        go-mode
         autopair))
 (el-get 'sync recipes)
 (el-get 'wait)
@@ -294,7 +296,18 @@
 (define-key evil-normal-state-map "\C-p" 'evil-previous-line)
 (define-key evil-insert-state-map "\C-p" 'evil-previous-line)
 (define-key evil-visual-state-map "\C-p" 'evil-previous-line)
+(define-key evil-insert-state-map "\C-k" 'evil-delete-line)
+(define-key evil-visual-state-map "\C-k" 'evil-delete-line)
 
 ;; editorconfig
 (load "editorconfig")
+
+;; go-mode
+(require 'go-mode-autoloads)
+
+;; Encryption
+(require 'epa-file)
+(epa-file-enable)
+
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)
