@@ -1,13 +1,11 @@
-Simple command reference for Emacs
-===================================
+# Simple command reference for Emacs
 
-Basic
------
+## Basic
 
 **C-x C-c**: Exit
 
-Movement
---------
+## Movement
+
 **C-p** : Up
 
 **C-n** : Down
@@ -16,8 +14,7 @@ Movement
 
 **C-b** : Left
 
-Copy & paste
-------------
+## Copy & paste
 
 **M-w** : Copy
 
@@ -25,8 +22,7 @@ Copy & paste
 
 **C-space** : Mark a region
 
-Files
------
+## Files
 
 **C-x C-f** : Open a file
 
@@ -38,8 +34,7 @@ Files
 
 **M->** : Go to end of file
 
-Buffers
--------
+## Buffers
 
 **C-x k** : Kill the buffer
 
@@ -47,8 +42,7 @@ Buffers
 
 **C-x b** : Switch between buffers
 
-Windows & frames
-----------------
+## Windows & frames
 
 **C-x o** : Switch between windows
 
@@ -60,13 +54,11 @@ Windows & frames
 
 **C-x 5 0** : Close this frame
 
-Finding
--------
+## Finding
 
 **M-x find-name-dired** : Find a file using *dired* mode
 
-Search & replace
-----------------
+## Search & replace
 
 **C-s** : Search forward (incremental)
 
@@ -82,8 +74,7 @@ Search & replace
 
 **M-x rgrep** : Searching recursively for some strings (regexps) in a file tree
 
-Undo & redo
------------
+## Undo & redo
 
 **C-/** : Undo
 
@@ -91,15 +82,13 @@ Undo & redo
 
 **C_** : Redo
 
-Deleting
---------
+## Deleting
 
 **C-k** : Kill to end of file
 
 **C-d** : Delete current character
 
-Column mode
------------
+## Column mode
 
 For editing columns we can use *CUA* mode:
 
@@ -108,8 +97,7 @@ For editing columns we can use *CUA* mode:
 3. Mark text
 4. Insert text!
 
-Tags
-----
+## Tags
 
 We can use *etags* command for generating our *TAGS* file, which is
 used by *Emacs*
@@ -118,37 +106,37 @@ used by *Emacs*
 
 **M-,** : Go to next match
 
-Lisp programming
-----------------
+## Lisp programming
 
 **C-x C-e**: Evaluate current buffer
 
-Input methods
--------------
+## Input methods
 
 * **M-x describe-input-method**: Info. about current input method
 
-Tramp
------
+## Tramp
 
 **/sudo::** => Open a file as *root*
 
 **/user@server:** => Open a remote shell for editing files
 
-Coding
-------
+## Coding
 
 **C-x RET f undecided-unix**: Change line terminator from Dos/Mac to UNIX
 
-Case conversion
----------------
+## Case conversion
 
 **M-l**: Convert following word to lower case
 
 **M-u**: Convert following word to upper case
 
-Misc
-----
+## Macros
+
+**C-(**: Start recording macro
+**C-)**: Stop recording macro
+**C-e**: Execute macro
+
+## Misc
 
 **C-x z** : Repeat last command. To repeat second time type **z**
 
