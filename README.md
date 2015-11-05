@@ -14,4 +14,7 @@ Done!
 
 ## Versions
 
-Working with **Emacs 24.4.1** on **Mac OS X 10.10.2**
+The *init.el* file has been tested with the follwing software versions:
+
+* **Emacs 24.5.1** on **Mac OS X 10.10.3**
+* **Emacs 24.4.1** on **Mac OS X 10.10.2**

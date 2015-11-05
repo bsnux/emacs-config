@@ -138,6 +138,12 @@ used by *Emacs*
 
 **C-e**: Execute macro
 
+**C-x n title-case-macro**: Give *title-case-macro* name and save macro
+
+**M-x title-case-macro**: Execute *title-case-macro*
+
+**C-u 3 M-x title-case-macro**: Execte 3 times *title-case-macro*
+
 ## Misc
 
 **C-x z** : Repeat last command. To repeat second time type **z**
