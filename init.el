@@ -1,11 +1,16 @@
-;;; Package --- init.el
-;;;  Configuration file for Emacs running on Mac OS X
-;;;
+;;; init.el -- bsnux Emacs config file
 
+;; Author: Arturo Fernandez
 
 ;;; Commentary:
+;; Based on https://github.com/dimitri/emacs-kicker
+
+;;; Installation:
+
+;; Add this file to your ~/.emacs.d directory
 
 ;;; Code:
+
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -16,203 +21,208 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+;; now either el-get is required already, or have been loaded by the
+;; el-get installer.
 
-;(setq color-theme-is-global t)
+(setq
+ el-get-sources
+ '((:name evil
+      :after (progn
+	    (define-key evil-normal-state-map "\C-a" 'evil-beginning-of-line)
+            (define-key evil-insert-state-map "\C-a" 'beginning-of-line)
+            (define-key evil-visual-state-map "\C-a" 'evil-beginning-of-line)
+            (define-key evil-motion-state-map "\C-a" 'evil-beginning-of-line)
+            (define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
+            (define-key evil-insert-state-map "\C-e" 'end-of-line)
+            (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
+            (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
+            (define-key evil-normal-state-map "\C-f" 'evil-forward-char)
+            (define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+            (define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+            (define-key evil-normal-state-map "\C-b" 'evil-backward-char)
+            (define-key evil-insert-state-map "\C-b" 'evil-backward-char)
+            (define-key evil-visual-state-map "\C-b" 'evil-backward-char)
+            (define-key evil-normal-state-map "\C-d" 'evil-delete-char)
+            (define-key evil-insert-state-map "\C-d" 'evil-delete-char)
+            (define-key evil-visual-state-map "\C-d" 'evil-delete-char)
+            (define-key evil-normal-state-map "\C-n" 'evil-next-line)
+            (define-key evil-insert-state-map "\C-n" 'evil-next-line)
+            (define-key evil-visual-state-map "\C-n" 'evil-next-line)
+            (define-key evil-normal-state-map "\C-p" 'evil-previous-line)
+            (define-key evil-insert-state-map "\C-p" 'evil-previous-line)
+            (define-key evil-visual-state-map "\C-p" 'evil-previous-line)
+            (define-key evil-insert-state-map "\C-k" 'evil-delete-line)
+            (define-key evil-visual-state-map "\C-k" 'evil-delete-line)))
+   (:name auto-complete
+      :after (progn
+         (define-key ac-complete-mode-map "\C-n" 'ac-next)
+         (define-key ac-complete-mode-map "\C-p" 'ac-previous)))))
 
-;; required by el-get
-(setq recipes
-      '(el-get
-        flycheck
-        whitespace
-        ido-ubiquitous
-        auto-complete
-        highlight-parentheses
-        yasnippet
-        yasnippet-snippets
-        multiple-cursors
-        darcula-theme
-        color-theme-almost-monokai
-        fill-column-indicator
-        undo-tree
-        markdown-mode
-        markdown-preview-mode
-        evil
-        magit
-        ecb
-        elixir
-        cider
-        haskell-mode
-        color-theme-zenburn
-        solarized-emacs
-        editorconfig
-        tramp
-        rst-mode
-        go-mode
-        autopair))
-(el-get 'sync recipes)
-(el-get 'wait)
+;; packages
+(setq
+ my:el-get-packages
+ '(el-get
+   yasnippet
+   auto-complete
+   evil
+   flycheck
+   ecb
+   exec-path-from-shell
+   magit
+  ; editorconfig
+   markdown-mode
+   yaml-mode
+   color-theme
+   color-theme-zenburn
+   monokai-theme
+   color-theme-almost-monokai))
 
-(evil-mode 1)
+(setq my:el-get-packages
+      (append
+       my:el-get-packages
+       (loop for src in el-get-sources collect (el-get-source-name src))))
 
-;(require 'color-theme)
-;(color-theme-initialize)
-;(stq color-theme-is-global t
-;;(color-theme-railscasts)
-;(require 'darcula-theme)
-;(color-theme-almost-monokai)
-(load-theme 'zenburn t)
-;(load-theme 'solarized-dark t)
+;; install new packages and init already installed packages
+(el-get 'sync my:el-get-packages)
 
-(require 'fill-column-indicator)
-(setq-default fill-column 80)
-(setq fci-rule-use-dashes t)
-(setq fci-rule-color "#616161")
-(add-hook 'after-change-major-mode-hook 'fci-mode)
+(require 'ecb)
+(require 'ecb-autoloads)
 
-(setq initial-scratch-message ";; scratch buffer: Lisp evaluation & draft notes")
+;; Yasnippet
+(yas-global-mode 1)
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/el-get/yasnippet")
 
-;; Undo tree mode
-(require 'undo-tree)
-(global-undo-tree-mode 1)
-(defalias 'redo 'undo-tree-redo)
-(global-set-key (kbd "<M-z>") 'undo)
-(global-set-key (kbd "<M-y>") 'redo)
 
-;; Changes all yes/no questions to y/n type
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq delete-auto-save-files t)     ; Delete unnecesary auto-save files (ex. #%*mail*#')
 
+;; No backup files
 (setq make-backup-files nil)
 
-;; Delete unnecesary auto-save files (ex. #%*mail*#')
-(setq delete-auto-save-files t)
+;; Custom init buffer
+(setq initial-scratch-message ";; scratch buffer: Lisp evaluation & draft notes")
 
-;; Column and line numbers
-(setq-default column-number-mode t)
-(setq-default line-number-mode t)
-(global-linum-mode 1)
+(line-number-mode 1)                ; have line numbers and
+(column-number-mode 1)              ; column numbers in the mode line
+(global-hl-line-mode)               ; highlight current line
+(set-face-background 'hl-line "#3e4446")
+(global-linum-mode 1)               ; add line numbers on the left
 
-(unless window-system
-  (add-hook 'linum-before-numbering-hook
-            (lambda ()
-              (setq-local linum-format-fmt
-                          (let ((w (length (number-to-string
-                                            (count-lines (point-min) (point-max))))))
-                            (concat "%" (number-to-string w) "d"))))))
-
+;; Adding spaces between line numbers and buffer content
+(add-hook 'linum-before-numbering-hook
+        (lambda ()
+          (setq-local linum-format-fmt
+                      (let ((w (length (number-to-string
+                                        (count-lines (point-min) (point-max))))))
+                        (concat "%" (number-to-string w) "d")))))
 (defun linum-format-func (line)
   (concat
    (propertize (format linum-format-fmt line) 'face 'linum)
    (propertize " " 'face 'mode-line)))
-
-(unless window-system
-    (setq linum-format 'linum-format-func))
-
-;; Tabs
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq standard-indent 4)
-(setq default-tab-width 4)
-
-;; Highlight +80 lines
-(setq whitespace-style '(lines))
-(setq whitespace-style '(empty tabs lines-tail trailing))
-(global-whitespace-mode t)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-;; Show and delete trailing whitespace (on save)
-(setq-default show-trailing-whitespace t)
-(setq default-indicate-empty-lines t)
-
-;; Enable mouse support
-(unless window-system
-  (require 'mouse)
-  (xterm-mouse-mode t)
-  (global-set-key [mouse-4] '(lambda ()
-                               (interactive)
-                               (scroll-down 1)))
-  (global-set-key [mouse-5] '(lambda ()
-                               (interactive)
-                               (scroll-up 1)))
-  (defun track-mouse (e))
-  (setq mouse-sel-mode t)
-  )
-
-
-;; scroll window under mouse
-(setq mouse-wheel-follow-mouse 't)
-
-;; Server: Open files in server with `emacsclient <filename>`
-;;(server-start)
-
-;; Highlight current line
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "#3e4446")
-
-;; Soft wrap
-(global-visual-line-mode 1)
+(setq linum-format 'linum-format-func)
 
 ;; Automatically re-visiting the file in current buffer when it was
 ;; modified by an external program
 (global-auto-revert-mode 1)
 
-;; Ask whether or not to close, and then close if y was pressed
-(defun ask-before-closing ()
-  (interactive)
-  (if (y-or-n-p (format "Are you sure you want to quit Emacs? "))
-      (if (< emacs-major-version 22)
-          (save-buffers-kill-terminal)
-        (save-buffers-kill-emacs))
-    (message "Canceled exit")))
+;; Show and delete trailing whitespace (on save)
+(setq whitespace-style '(lines))
+(setq whitespace-line-column 78)
+(global-whitespace-mode 1)
+(setq-default show-trailing-whitespace t)
+(setq default-indicate-empty-lines t)
 
-;; follow symlinks and don't ask
-(setq vc-follow-symlinks t)
+(evil-mode 1)                           ; evil-mode
 
-;; Packages
-(autopair-global-mode)
+;(load-theme 'zenburn t)
+(load-theme 'monokai t)
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq flycheck-flake8-maximum-line-length 100)
+(fset 'yes-or-no-p 'y-or-n-p)           ; Changes all yes/no questions to y/n type
 
+(electric-pair-mode 1)                  ; New in Emacs 24.4
+
+
+(require 'ido)
 (ido-mode t)
-(ido-ubiquitous t)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-            ido-max-prospects 10)
+(setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
+(setq ido-enable-flex-matching t)
+(setq ido-use-filename-at-point 'guess)
+(setq ido-show-dot-for-dired t)
+(setq ido-default-buffer-method 'selected-window)
 
-;; Load snippets
-;; (require 'yasnippet)
-;; (setq yas/root-directory (list (concat user-dir (file-name-as-directory "snippets"))
-;;                                (concat system-dir (file-name-as-directory "snippets"))
-;;                                (concat base-dir (file-name-as-directory "snippets"))
-;;                                (concat user-emacs-directory (file-name-as-directory "el-get/yasnippet/snippets"))))
+;; default key to switch buffer is C-x b, but that's not easy enough
+;;
+;; when you do that, to kill emacs either close its frame from the window
+;; manager or do M-x kill-emacs.  Don't need a nice shortcut for a once a
+;; week (or day) action.
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+(global-set-key (kbd "M-p") 'ido-switch-buffer)
+(global-set-key (kbd "C-x B") 'ibuffer)
 
-(yas-global-mode 1)
+;; Saving buffer
+(global-set-key (kbd "C-s") 'save-buffer)
 
-(cua-mode t)
+;; have vertical ido completion lists
+(setq ido-decorations
+      '("\n-> " "" "\n   " "\n   ..." "[" "]"
+    " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
-;; Keybindings
-(global-set-key "\M-r" 'replace-string)
-(global-set-key "\C-l" 'goto-line)
-(global-set-key "\M-j" 'join-line)
-(global-set-key (kbd "<M-up>") 'beginning-of-buffer)
-(global-set-key (kbd "<M-down>") 'end-of-buffer)
-(global-set-key "\M-c" 'copy-to-x-clipboard)
+;; Disabling auto-save for files
+(setq auto-save-default nil)
 
-;; Font type (X Emacs on Mac OS X);;(set-face-attribute 'default nil
-;;                :family "DejaVu Sans Mono for Powerline" :height 135 :weight 'normal)
+;; `flycheck` module
+;; It works out of the box for many languages but you'll need to install checkers
+;; first:
+;;      $ pip install flake8
+;;      $ npm install jshint -g
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(set-face-attribute 'default nil
-                :family "DejaVu Sans Mono for Powerline" :height 125 :weight 'normal)
 
-;; Let's Emacs X can read env variables from PATH
+;; Using TRAMP via `'sudo` when trying to edit `root` files
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+	       (file-writable-p buffer-file-name))
+        (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(when (eq system-type 'darwin)
+
+  ;; default Latin font (e.g. Consolas)
+  (set-face-attribute 'default nil :family "Menlo for Powerline")
+
+  ;; default font size (point * 10)
+  ;;(set-face-attribute 'default nil :height 115)
+  (set-face-attribute 'default nil :height 112)
+  ;; (set-face-attribute 'default nil :height 105)
+  )
+
+;; Disabling tool-bar
+(tool-bar-mode -1)
+
+;; Make sure environment variables inside Emacs look the same as in the user's shell,
+;; becaus OS X GUI applications do not inherit variables from the shell configuration
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
+
+;; Pretty format for XML. Make sure `xmllint' executable is in your PATH
+(defun nxml-pretty-format ()
+    (interactive)
+    (save-excursion
+        (shell-command-on-region (point-min) (point-max) "xmllint --format -" (buffer-name) t)
+        (nxml-mode)
+        (indent-region begin end)))
+
+;; Markdown mode config
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;; Default tab size
+(setq default-tab-width 4)
+;; Indent for JS
+(setq js-indent-level 2)
+
+;; EditorConfig
+;;(load "editorconfig")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -220,7 +230,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "31a01668c84d03862a970c471edbd377b2430868eccf5e8a9aec6831f1a0908d" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" default)))
+    ("a6b3505132c41686521cad3cccdc28ef7cc1f04338073a63146a231a1786537c" default)))
  '(ecb-options-version "2.40"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -228,86 +238,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(setq select-active-regions nil)
-(setq mouse-drag-copy-region t)
-(global-set-key [mouse-2] 'mouse-yank-at-click)
 
-(setq *is-a-mac* (eq system-type 'darwin))
-(setq *cygwin* (eq system-type 'cygwin) )
-(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
-(defun copy-to-x-clipboard ()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (cond
-         ((and (display-graphic-p) x-select-enable-clipboard)
-          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
-         (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
-            ))
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-    (message "No region active; can't yank to clipboard!")))
-
-(defun paste-from-x-clipboard()
-  (interactive)
-  (cond
-   ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-get-selection 'CLIPBOARD)))
-   (t (shell-command
-       (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
-        (t "xsel -ob"))
-       1))
-   ))
-
-(defun my/paste-in-minibuffer ()
-  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
-  )
-
-(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
-
-;; JavaScript
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(setq-default js2-basic-offset 2)
-(setq javascript-indent-level 2)
-
-;; Using standard moving keys inside `evil` mode
-(define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
-(define-key evil-insert-state-map "\C-e" 'end-of-line)
-(define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
-(define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
-(define-key evil-normal-state-map "\C-f" 'evil-forward-char)
-(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
-(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
-(define-key evil-normal-state-map "\C-b" 'evil-backward-char)
-(define-key evil-insert-state-map "\C-b" 'evil-backward-char)
-(define-key evil-visual-state-map "\C-b" 'evil-backward-char)
-(define-key evil-normal-state-map "\C-d" 'evil-delete-char)
-(define-key evil-insert-state-map "\C-d" 'evil-delete-char)
-(define-key evil-visual-state-map "\C-d" 'evil-delete-char)
-(define-key evil-normal-state-map "\C-n" 'evil-next-line)
-(define-key evil-insert-state-map "\C-n" 'evil-next-line)
-(define-key evil-visual-state-map "\C-n" 'evil-next-line)
-(define-key evil-normal-state-map "\C-p" 'evil-previous-line)
-(define-key evil-insert-state-map "\C-p" 'evil-previous-line)
-(define-key evil-visual-state-map "\C-p" 'evil-previous-line)
-(define-key evil-insert-state-map "\C-k" 'evil-delete-line)
-(define-key evil-visual-state-map "\C-k" 'evil-delete-line)
-
-;; editorconfig
-(load "editorconfig")
-
-;; go-mode
-(require 'go-mode-autoloads)
-
-;; Encryption
-(require 'epa-file)
-(epa-file-enable)
-
-;;; init.el ends here
-(put 'upcase-region 'disabled nil)
