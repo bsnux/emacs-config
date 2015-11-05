@@ -7,6 +7,7 @@
 
 ;;; Installation:
 
+;; Install el-get package: https://github.com/dimitri/el-get
 ;; Add this file to your ~/.emacs.d directory
 
 ;;; Code:
