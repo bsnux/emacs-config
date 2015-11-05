@@ -133,7 +133,9 @@ used by *Emacs*
 ## Macros
 
 **C-(**: Start recording macro
+
 **C-)**: Stop recording macro
+
 **C-e**: Execute macro
 
 ## Misc
