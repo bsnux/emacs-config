@@ -73,6 +73,8 @@
   ; editorconfig
    markdown-mode
    yaml-mode
+   ace-jump-mode
+   dockerfile-mode
    color-theme
    color-theme-zenburn
    monokai-theme
@@ -177,6 +179,9 @@
 ;;      $ npm install jshint -g
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; Checking files uisng `flycheck' only when files are saved
+(setq flycheck-check-syntax-automatically '(save))
+
 
 ;; Using TRAMP via `'sudo` when trying to edit `root` files
 (defadvice ido-find-file (after find-file-sudo activate)
@@ -224,6 +229,32 @@
 ;; EditorConfig
 ;;(load "editorconfig")
 
+; Enable mouse support
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] (lambda ()
+							  (interactive)
+							  (scroll-down 1)))
+  (global-set-key [mouse-5] (lambda ()
+							  (interactive)
+							  (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
+;; Docker mode
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+;; Ctags
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+   (format "ctags -f %s/TAGS -e -R %s -h .py" dir-name (directory-file-name dir-name)))
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -231,7 +262,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a6b3505132c41686521cad3cccdc28ef7cc1f04338073a63146a231a1786537c" default)))
+	("13de1e95bbc7475e680e50333e9418becef53cb7f41ab632261efd13f9a4f57d" "a6b3505132c41686521cad3cccdc28ef7cc1f04338073a63146a231a1786537c" default)))
  '(ecb-options-version "2.40"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
