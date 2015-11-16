@@ -104,6 +104,8 @@ used by *Emacs*
 
 **M-.** : Find tag
 
+**M-x find-tag** : Find tag
+
 **M-,** : Go to next match
 
 ## Lisp programming
