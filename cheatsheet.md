@@ -165,3 +165,7 @@ used by *Emacs*
 **M-x occur**: Display a new buffer with founded occurences in file
 
 **M-x sort-lines**: Sorting all lines in a file
+
+**M-x tabify**: Converts spaces to tabs
+
+**M-x untabify**: Converts tabs to spaces
