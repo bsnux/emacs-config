@@ -146,6 +146,10 @@ used by *Emacs*
 
 **C-u 3 M-x title-case-macro**: Execte 3 times *title-case-macro*
 
+## Spell checking
+
+**M-x ispell**: Spell check using `Ispell` command
+
 ## Misc
 
 **C-x z** : Repeat last command. To repeat second time type **z**
