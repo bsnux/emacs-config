@@ -75,6 +75,7 @@
    yaml-mode
    ace-jump-mode
    dockerfile-mode
+   cider
    color-theme
    color-theme-zenburn
    monokai-theme
@@ -93,8 +94,8 @@
 
 ;; Yasnippet
 (yas-global-mode 1)
-(add-to-list 'yas-snippet-dirs "~/.emacs.d/el-get/yasnippet")
 
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/el-get/yasnippet/snippets")
 
 (setq delete-auto-save-files t)     ; Delete unnecesary auto-save files (ex. #%*mail*#')
 
@@ -134,7 +135,7 @@
 (setq-default show-trailing-whitespace t)
 (setq default-indicate-empty-lines t)
 
-(evil-mode 1)                           ; evil-mode
+;(evil-mode 1)                           ; evil-mode
 
 ;(load-theme 'zenburn t)
 (load-theme 'monokai t)
@@ -162,7 +163,7 @@
 (global-set-key (kbd "C-x B") 'ibuffer)
 
 ;; Saving buffer
-(global-set-key (kbd "C-s") 'save-buffer)
+;(global-set-key (kbd "C-s") 'save-buffer)
 
 ;; have vertical ido completion lists
 (setq ido-decorations
@@ -171,6 +172,9 @@
 
 ;; Disabling auto-save for files
 (setq auto-save-default nil)
+
+;; Go to line
+(global-set-key (kbd "C-l") 'goto-line)
 
 ;; `flycheck` module
 ;; It works out of the box for many languages but you'll need to install checkers
@@ -254,6 +258,25 @@
   (shell-command
    (format "ctags -f %s/TAGS -e -R %s -h .py" dir-name (directory-file-name dir-name)))
   )
+
+;; Copy&paste from clipboard on OSX
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+	(let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+	  (process-send-string proc text)
+	  (process-send-eof proc))))
+
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
+
+;; Show Paren mode
+(show-paren-mode 1)
+
+;; Cursor type
+;(set-default 'cursor-type 'bar)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
