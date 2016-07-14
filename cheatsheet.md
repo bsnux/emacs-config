@@ -150,6 +150,10 @@ used by *Emacs*
 
 **M-x ispell**: Spell check using `Ispell` command
 
+## Version control/git
+
+C-x v g: Display who changed what (`blame`)
+
 ## Misc
 
 **C-x z** : Repeat last command. To repeat second time type **z**
