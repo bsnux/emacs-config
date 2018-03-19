@@ -18,9 +18,13 @@
 
 (setq inhibit-startup-message t) ;; hide the startup message
 ;(load-theme 'material t) ;; load material theme
-(load-theme 'solarized t) ;; load solarized theme
+;(load-theme 'solarized t) ;; load solarized theme
+(load-theme 'gruvbox t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
+
+;; no menu-bar
+(menu-bar-mode -1)
 
 
 (global-linum-mode t) ;; enable line numbers globally
@@ -90,13 +94,29 @@
 (define-key evil-insert-state-map "\C-f" 'evil-forward-char)
 (define-key evil-normal-state-map "\C-n" 'evil-next-line)
 (define-key evil-insert-state-map "\C-n" 'evil-next-line)
-
+;; evil-mode cursor-change
+(unless (display-graphic-p)
+        (require 'evil-terminal-cursor-changer)
+        (evil-terminal-cursor-changer-activate)
+        )
+(setq evil-motion-state-cursor 'box)
+     (setq evil-visual-state-cursor 'box)
+     (setq evil-normal-state-cursor 'box)
+     (setq evil-insert-state-cursor 'bar)
+     (setq evil-emacs-state-cursor  'hbar)
 ;; yasnippets
 (require 'yasnippet)
 (yas-global-mode 1)
 
 ;; refresh a buffere when file changes on disk
 (global-auto-revert-mode 1)
+
+;; auto-complete
+(ac-config-default)
+(global-auto-complete-mode t)
+
+;;; flycheck
+(global-flycheck-mode)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
@@ -106,12 +126,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02" default)))
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
