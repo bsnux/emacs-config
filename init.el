@@ -115,8 +115,13 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
-;;; flycheck
+;; flycheck
 (global-flycheck-mode)
+
+;; ido-mode
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
@@ -134,7 +139,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
