@@ -1,7 +1,14 @@
-;; init.el --- Emacs configuration
+;;; init.el --- Emacs configuration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;     bsnux Emacs configuration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Code:
+
 
 ;; INSTALL PACKAGES
-;; --------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
 (add-to-list 'package-archives
@@ -14,7 +21,7 @@
 
 
 ;; BASIC CUSTOMIZATION
-;; --------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq inhibit-startup-message t) ;; hide the startup message
 ;(load-theme 'material t) ;; load material theme
@@ -122,6 +129,10 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+;; multiple-cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-n") 'mc/mark-all-like-this)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
