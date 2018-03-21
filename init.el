@@ -134,6 +134,9 @@
 (require 'multiple-cursors)
 (global-set-key (kbd "C-c C-n") 'mc/mark-all-like-this)
 
+;; turn on highlight matching brackets when cursor is on one
+(show-paren-mode 1)
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
