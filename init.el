@@ -153,7 +153,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (yaml-mode markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
