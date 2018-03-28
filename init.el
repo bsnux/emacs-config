@@ -133,10 +133,6 @@
 ;; multiple-cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-c C-n") 'mc/mark-all-like-this)
-(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
@@ -144,6 +140,10 @@
 ;; Neo-tree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
