@@ -72,11 +72,6 @@
   (define-key map (kbd "\C-p") 'company-select-previous)
 )
 
-;; Multiple-cursors
-(global-set-key (kbd "C-c m c") 'mc/edit-lines)
-(global-set-key (kbd "M-3") #'mc/mark-next-like-this)
-(global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
-
 ;; electric-pair
 (electric-pair-mode 1)
 (setq electric-pair-preserve-balance nil)
@@ -133,6 +128,12 @@
 ;; multiple-cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-c C-n") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c m c") 'mc/edit-lines)
+(global-set-key (kbd "M-3") #'mc/mark-next-like-this)
+(global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+
+
 
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
