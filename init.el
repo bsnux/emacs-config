@@ -24,8 +24,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq inhibit-startup-message t) ;; hide the startup message
-;(load-theme 'material t) ;; load material theme
-;(load-theme 'solarized t) ;; load solarized theme
+(load-theme 'material t) ;; load material theme
+;;(load-theme 'solarized-dark t) ;; load solarized theme
 (load-theme 'gruvbox t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
@@ -119,6 +119,7 @@
 (global-auto-revert-mode 1)
 
 ;; auto-complete
+(require 'auto-complete)
 (ac-config-default)
 (global-auto-complete-mode t)
 
@@ -126,9 +127,9 @@
 (global-flycheck-mode)
 
 ;; ido-mode
+(ido-mode 1)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(ido-mode 1)
 
 ;; multiple-cursors
 (require 'multiple-cursors)
@@ -145,26 +146,39 @@
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
-;; Disabling toolbar (useful for GUI version)
-(tool-bar-mode -1)
+;; no tabs
+(setq-default indent-tabs-mode nil)
+
+; If GUI then choose different font
+(when window-system
+  (tool-bar-mode -1)
+  ;(set-face-attribute 'default nil :height 100)
+  ;(set-frame-font "Monaco-9.5" t t)
+  (set-frame-font "Hack-9.5" t t)
+  (cua-mode t))
+
+;; auto-complete words
+(global-set-key (kbd "C-SPC") 'dabbrev-expand)
 
 ;; Packages in `package-selected-packages` can be installed by
-;; `package-install-selected-packages` command
+;; `package-ins
+;; tall-selected-packages` command
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cua-mode t nil (cua-base))
  '(custom-safe-themes
    (quote
-    ("6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02" default)))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02" default)))
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (editorconfig neotree yaml-mode markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (solarized-theme editorconfig neotree yaml-mode markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
