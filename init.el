@@ -167,6 +167,12 @@
    (require 'go-autocomplete))
 
 
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 4)
+            (setq indent-tabs-mode 1)))
+
 ;;; Packages in `package-selected-packages` can be installed by
 ;; `package-ins
 ;; tall-selected-packages` command
