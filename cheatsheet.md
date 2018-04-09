@@ -154,7 +154,31 @@ used by *Emacs*
 
 ## Version control/git
 
-C-x v g: Display who changed what (`blame`)
+**C-x v g**: Display who changed what (`blame`)
+
+## Org mode
+
+**Shif-left/right**: cycle workflow
+
+**C-c C-v**: show todos in current document
+
+**C-c a** : call the agenda
+
+**C-c C-q** : set tag
+
+**C-c ,** : set priority
+
+**M-enter** : new item at current level
+
+**C-c C-d** : Insert a DEADLINE
+
+**C-c .** : Prompt for date
+
+**C-c C-s** : Insert SCHEDULED timestamp
+
+**C-c .** (one for each date) : Selecting interval dates
+
+**C-c C-x a** : Archive a DONE task
 
 ## Misc
 
