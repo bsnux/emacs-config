@@ -156,12 +156,18 @@
   ;(set-face-attribute 'default nil :height 100)
   ;(set-frame-font "Monaco-9.5" t t)
   (set-frame-font "Hack-9.5" t t)
+  (exec-path-from-shell-initialize)
   (cua-mode t))
 
 ;; auto-complete words
 (global-set-key (kbd "C-SPC") 'dabbrev-expand)
 
-;; Packages in `package-selected-packages` can be installed by
+;; Ensure the go specific autocomplete is active in go-mode.
+(with-eval-after-load 'go-mode
+   (require 'go-autocomplete))
+
+
+;;; Packages in `package-selected-packages` can be installed by
 ;; `package-ins
 ;; tall-selected-packages` command
 
@@ -173,13 +179,13 @@
  '(cua-mode t nil (cua-base))
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02" default)))
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02" default)))
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (solarized-theme editorconfig neotree yaml-mode markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (exec-path-from-shell go-autocomplete solarized-theme editorconfig neotree yaml-mode markdown-mode groovy-mode flycheck auto-complete go-mode go haskell-mode evil-terminal-cursor-changer dockerfile-mode docker gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
