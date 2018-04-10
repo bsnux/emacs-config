@@ -173,6 +173,9 @@
             (setq tab-width 4)
             (setq indent-tabs-mode 1)))
 
+
+(global-set-key [f7] 'switch-to-buffer)
+
 ;;; Packages in `package-selected-packages` can be installed by
 ;; `package-ins
 ;; tall-selected-packages` command
