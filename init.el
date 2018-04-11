@@ -86,26 +86,6 @@
 ;; Column number
 (setq-default column-number-mode t)
 
-;;; evil-mode
-;(require 'evil)
-;(evil-mode 1)
-;(define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
-;(define-key evil-insert-state-map "\C-e" 'end-of-line)
-;(define-key evil-insert-state-map "\C-a" 'beginning-of-line)
-;(define-key evil-normal-state-map "\C-f" 'evil-forward-char)
-;(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
-;(define-key evil-normal-state-map "\C-n" 'evil-next-line)
-;(define-key evil-insert-state-map "\C-n" 'evil-next-line)
-;; evil-mode cursor-change
-;(unless (display-graphic-p)
-;        (require 'evil-terminal-cursor-changer)
-;        (evil-terminal-cursor-changer-activate)
-;        )
-;(setq evil-motion-state-cursor 'box)
-;     (setq evil-visual-state-cursor 'box)
-;     (setq evil-normal-state-cursor 'box)
-;     (setq evil-insert-state-cursor 'bar)
-;     (setq evil-emacs-state-cursor  'hbar)
 ;; yasnippets
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -134,18 +114,12 @@
 (global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
-
-
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
 
 ;; Neo-tree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
-;(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-;(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-;(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-;(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; no tabs
 (setq-default indent-tabs-mode nil)
@@ -162,9 +136,6 @@
   ;(load-theme 'dracula t)
   (load-theme 'atom-one-dark t)
   (cua-mode t))
-
-;; auto-complete words
-;(global-set-key (kbd "C-SPC") 'dabbrev-expand)
 
 ;; Ensure the go specific autocomplete is active in go-mode.
 (with-eval-after-load 'go-mode
