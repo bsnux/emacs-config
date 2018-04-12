@@ -156,6 +156,15 @@
 ; Highlight current line
 (global-hl-line-mode +1)
 
+(defun join-lines (arg)
+  "Join lines as Sublime Text does.  ARG is the line to be joined."
+  (interactive "p")
+  (end-of-line)
+  (delete-char 1)
+  (delete-horizontal-space)
+  (insert " "))
+(global-set-key (kbd "M-j") 'join-lines)
+
 ;;; Packages in `package-selected-packages` can be installed by
 ;; `package-ins
 ;; tall-selected-packages` command
