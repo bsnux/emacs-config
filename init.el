@@ -24,7 +24,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
+;(load-theme 'material t) ;; load material theme
 ;;(load-theme 'solarized-dark t) ;; load solarized theme
 (load-theme 'gruvbox t)
 (set-frame-parameter nil 'background-mode 'dark)
