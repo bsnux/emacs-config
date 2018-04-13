@@ -114,6 +114,10 @@
 (global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
+;; move to top/down quickly
+(global-set-key (kbd "<M-up>") 'beginning-of-buffer)
+(global-set-key (kbd "<M-down>") 'end-of-buffer)
+
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
 
