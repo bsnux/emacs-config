@@ -167,8 +167,7 @@
 (global-set-key (kbd "M-j") 'join-lines)
 
 ;;; Packages in `package-selected-packages` can be installed by
-;; `package-ins
-;; tall-selected-packages` command
+;; `package-install-selected-packages` command
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
