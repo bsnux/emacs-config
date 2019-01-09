@@ -1,15 +1,9 @@
 # Emacs configuration
 
-This repo contains basic files for *Emacs*. Basically, only one important configuration file.
+Configuration for running [XEmacs](https://www.xemacs.org/) on macOS.
 
 ## Installation
 
 ```sh
 git clone https://github.com/bsnux/emacs-config.git ~/.emacs.d
 ```
-
-## Versions
-
-Configuration has been tested with the following versions:
-
-* **Emacs 25.1.1** on **Mac OS X 10.11.6**
