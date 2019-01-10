@@ -69,8 +69,9 @@
 
 ;; Multiple-cursors
 (global-set-key (kbd "C-c m c") 'mc/edit-lines)
-(global-set-key (kbd "M-3") #'mc/mark-next-like-this)
-(global-set-key (kbd "M-4") #'mc/mark-previous-like-this)
+(global-set-key (kbd "<M-s-down>") #'mc/mark-next-like-this)
+(global-set-key (kbd "<M-s-up>") #'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c ,") 'mc/mark-all-like-this)
 
 ;; Switching to buffer quickly using Cmd-p
 (global-set-key (kbd "s-p") 'switch-to-buffer)
@@ -89,18 +90,20 @@
 ;; Column number
 (setq-default column-number-mode t)
 
-;; evil-mode
-(require 'evil)
-(evil-mode 1)
-(define-key evil-insert-state-map "\C-e" 'end-of-line)
-(define-key evil-insert-state-map "\C-a" 'beginning-of-line)
-(define-key evil-insert-state-map "\C-n" 'evil-next-line)
-(define-key evil-insert-state-map "\C-p" 'evil-previous-line)
-(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
-(define-key evil-insert-state-map "\C-b" 'evil-backward-char)
-(define-key evil-insert-state-map "\C-k" 'kill-line)
+;; Display a bar for the cursor
+(setq-default cursor-type 'bar)
 
-(setq evil-emacs-state-cursor '("SkyBlue2" bar))
+;; evil-mode
+;;(require 'evil)
+;;(evil-mode 1)
+;;(define-key evil-insert-state-map "\C-e" 'end-of-line)
+;;(define-key evil-insert-state-map "\C-a" 'beginning-of-line)
+;;(define-key evil-insert-state-map "\C-n" 'evil-next-line)
+;;(define-key evil-insert-state-map "\C-p" 'evil-previous-line)
+;;(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+;;(define-key evil-insert-state-map "\C-b" 'evil-backward-char)
+;;(define-key evil-insert-state-map "\C-k" 'kill-line)
+;;(setq evil-emacs-state-cursor '("SkyBlue2" bar))
 
 ;; yasnippets
 (require 'yasnippet)
@@ -112,6 +115,25 @@
 ;; editorconfig
 (require 'editorconfig)
 (editorconfig-mode 1)
+
+;; Open bigger frame
+(add-to-list 'default-frame-alist '(height . 70))
+(add-to-list 'default-frame-alist '(width . 120))
+
+;; Git gutter working with linum-mode
+(global-git-gutter-mode +1)
+
+;; Enabling ido-mode
+(require 'ido)
+(ido-mode 1)
+
+;; company-mode for auto-completion
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-company-mode 1)
+
+;; Overwrite selected region when pasting code
+(delete-selection-mode 1)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
@@ -129,7 +151,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
