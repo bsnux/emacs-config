@@ -19,34 +19,20 @@
 ;; BASIC CUSTOMIZATION
 ;; --------------------------------------
 
-(setq inhibit-startup-message t) ;; hide the startup message
-;(load-theme 'material t) ;;
-;(load-theme 'gruvbox t) ;;
-;(load-theme 'railscasts t)
+;; Hide the startup message
+(setq inhibit-startup-message t)
+
+;; Color theme
 (load-theme 'atom-one-dark t)
-;(load-theme 'solarized t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
 
-(global-linum-mode t) ;; enable line numbers globally
+;; Enable line numbers globally
+(global-linum-mode t)
 
 (menu-bar-mode 0)
 
 (setq vc-follow-symlinks t)
-
-;; Adding spaces between line numbers and buffer content
-;(add-hook 'linum-before-numbering-hook
-;   (lambda ()
-;	 (setq-local linum-format-fmt
-;	 (let ((w (length (number-to-string
-;   (count-lines (point-min) (point-max))))))
-;(concat "%" (number-to-string w) "d")))))
-;
-;(defun linum-format-func (line)
-; (concat
-;  (propertize (format linum-format-fmt line) 'face 'linum)
-;  (propertize " " 'face 'mode-line)))
-;(setq linum-format 'linum-format-func)
 
 ;; No backup files
 (setq make-backup-files nil)
@@ -57,9 +43,6 @@
 
 ;; No visual bell
 (setq visible-bell nil)
-
-;; Goto line
-(global-set-key (kbd "C-l") 'goto-line)
 
 ;; Redefining keymaps for company-mode (used by elpy)
 (let ((map company-active-map))
@@ -72,9 +55,6 @@
 (global-set-key (kbd "<M-s-down>") #'mc/mark-next-like-this)
 (global-set-key (kbd "<M-s-up>") #'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c ,") 'mc/mark-all-like-this)
-
-;; Switching to buffer quickly using Cmd-p
-(global-set-key (kbd "s-p") 'switch-to-buffer)
 
 ;; electric-pair
 (electric-pair-mode 1)
@@ -93,18 +73,6 @@
 ;; Display a bar for the cursor
 (setq-default cursor-type 'bar)
 
-;; evil-mode
-;;(require 'evil)
-;;(evil-mode 1)
-;;(define-key evil-insert-state-map "\C-e" 'end-of-line)
-;;(define-key evil-insert-state-map "\C-a" 'beginning-of-line)
-;;(define-key evil-insert-state-map "\C-n" 'evil-next-line)
-;;(define-key evil-insert-state-map "\C-p" 'evil-previous-line)
-;;(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
-;;(define-key evil-insert-state-map "\C-b" 'evil-backward-char)
-;;(define-key evil-insert-state-map "\C-k" 'kill-line)
-;;(setq evil-emacs-state-cursor '("SkyBlue2" bar))
-
 ;; yasnippets
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -119,9 +87,6 @@
 ;; Open bigger frame
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 120))
-
-;; Git gutter working with linum-mode
-;(global-git-gutter-mode +1)
 
 ;; Enabling ido-mode
 (require 'ido)
@@ -151,6 +116,8 @@
 (global-set-key (kbd "s-j") 'join-line)
 (global-set-key (kbd "s-\\") 'split-window-right)
 (global-set-key (kbd "s-\-") 'split-window-below)
+(global-set-key (kbd "C-l") 'goto-line)
+(global-set-key (kbd "s-p") 'switch-to-buffer)
 
 ;; Golang
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
