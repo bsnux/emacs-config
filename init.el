@@ -149,6 +149,8 @@
 (global-set-key (kbd "<s-up>") 'beginning-of-buffer)
 (global-set-key (kbd "<s-down>") 'end-of-buffer)
 (global-set-key (kbd "s-j") 'join-line)
+(global-set-key (kbd "s-\\") 'split-window-right)
+(global-set-key (kbd "s-\-") 'split-window-below)
 
 ;; Golang
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
@@ -170,6 +172,9 @@
 
 ;; Markdown
 (setq markdown-command "/usr/local/bin/markdown")
+
+;; `calendar` command will start week on Monday
+(setq calendar-week-start-day 1)
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
