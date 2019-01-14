@@ -35,18 +35,18 @@
 (setq vc-follow-symlinks t)
 
 ;; Adding spaces between line numbers and buffer content
-(add-hook 'linum-before-numbering-hook
-   (lambda ()
-	 (setq-local linum-format-fmt
-	 (let ((w (length (number-to-string
-   (count-lines (point-min) (point-max))))))
-(concat "%" (number-to-string w) "d")))))
-
-(defun linum-format-func (line)
- (concat
-  (propertize (format linum-format-fmt line) 'face 'linum)
-  (propertize " " 'face 'mode-line)))
-(setq linum-format 'linum-format-func)
+;(add-hook 'linum-before-numbering-hook
+;   (lambda ()
+;	 (setq-local linum-format-fmt
+;	 (let ((w (length (number-to-string
+;   (count-lines (point-min) (point-max))))))
+;(concat "%" (number-to-string w) "d")))))
+;
+;(defun linum-format-func (line)
+; (concat
+;  (propertize (format linum-format-fmt line) 'face 'linum)
+;  (propertize " " 'face 'mode-line)))
+;(setq linum-format 'linum-format-func)
 
 ;; No backup files
 (setq make-backup-files nil)
@@ -121,7 +121,7 @@
 (add-to-list 'default-frame-alist '(width . 120))
 
 ;; Git gutter working with linum-mode
-(global-git-gutter-mode +1)
+;(global-git-gutter-mode +1)
 
 ;; Enabling ido-mode
 (require 'ido)
@@ -129,11 +129,47 @@
 
 ;; company-mode for auto-completion
 (require 'company)
+(require 'company-go)
 (add-hook 'after-init-hook 'global-company-mode)
 (global-company-mode 1)
+(add-hook 'go-mode-hook
+      (lambda ()
+        (set (make-local-variable 'company-backends) '(company-go))
+        (company-mode)))
 
 ;; Overwrite selected region when pasting code
 (delete-selection-mode 1)
+
+;; Select regions between chars like a boss
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; Useful shortcuts
+(global-set-key (kbd "s-r") 'replace-string)
+(global-set-key (kbd "<s-up>") 'beginning-of-buffer)
+(global-set-key (kbd "<s-down>") 'end-of-buffer)
+(global-set-key (kbd "s-j") 'join-line)
+
+;; Golang
+(setenv "GOPATH" "/Users/arturofernandez/dev/go")
+(add-to-list 'exec-path "/Users/arturofernandez/dev/go/bin")
+(defun my-go-mode-hook ()
+  ; Use goimports instead of go-fmt
+  (setq gofmt-command "goimports")
+  ; Call Gofmt before saving
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ; Customize compile command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go generate && go build -v && go test -v && go vet"))
+  ; Godef jump key binding
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
+;; Markdown
+(setq markdown-command "/usr/local/bin/markdown")
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
@@ -151,7 +187,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
