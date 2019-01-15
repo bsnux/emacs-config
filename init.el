@@ -109,6 +109,9 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; Setting ssh as default method for tramp
+(setq tramp-default-method "ssh")
+
 ;; Useful shortcuts
 (global-set-key (kbd "s-r") 'replace-string)
 (global-set-key (kbd "<s-up>") 'beginning-of-buffer)
@@ -118,6 +121,10 @@
 (global-set-key (kbd "s-\-") 'split-window-below)
 (global-set-key (kbd "C-l") 'goto-line)
 (global-set-key (kbd "s-p") 'switch-to-buffer)
+(global-set-key (kbd "s-=") 'text-scale-increase)
+(global-set-key (kbd "s-_") 'text-scale-decrease)
+(global-set-key (kbd "s-[") 'indent-rigidly-right-to-tab-stop)
+(global-set-key (kbd "s-]") 'indent-rigidly-left-to-tab-stop)
 
 ;; Golang
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
