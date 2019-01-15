@@ -168,7 +168,7 @@ C-x v g: Display who changed what (`blame`)
 
 **C-c C-c** : Execute script (Python mode and others)
 
-**C-x C-f RET /user@host:/home/arturo/.emacs** : Open remote file using TRAMP
+**C-x C-f RET /ssh:user@host:/home/arturo/.emacs** : Open remote file using TRAMP
 
 **C-s C-w** : Search word under cursor (equivalent to '*' in Vim)
 
