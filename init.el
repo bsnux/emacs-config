@@ -41,12 +41,6 @@
 ;; No visual bell
 (setq visible-bell nil)
 
-;; Redefining keymaps for company-mode
-(let ((map company-active-map))
-  (define-key map (kbd "\C-n") 'company-select-next)
-  (define-key map (kbd "\C-p") 'company-select-previous)
-)
-
 ;; Multiple-cursors
 (global-set-key (kbd "C-c m c") 'mc/edit-lines)
 (global-set-key (kbd "<M-s-down>") #'mc/mark-next-like-this)
