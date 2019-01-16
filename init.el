@@ -125,6 +125,7 @@
 (global-set-key (kbd "s-_") 'text-scale-decrease)
 (global-set-key (kbd "s-[") 'indent-rigidly-right-to-tab-stop)
 (global-set-key (kbd "s-]") 'indent-rigidly-left-to-tab-stop)
+(global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 
 ;; Golang
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
@@ -150,6 +151,9 @@
 ;; `calendar` command will start week on Monday
 (setq calendar-week-start-day 1)
 
+;; Asking for confirmation before closing Emacs
+(setq confirm-kill-emacs 'y-or-n-p)
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
@@ -166,7 +170,7 @@
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
