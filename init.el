@@ -38,13 +38,10 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; Python
-(elpy-enable)
-
 ;; No visual bell
 (setq visible-bell nil)
 
-;; Redefining keymaps for company-mode (used by elpy)
+;; Redefining keymaps for company-mode
 (let ((map company-active-map))
   (define-key map (kbd "\C-n") 'company-select-next)
   (define-key map (kbd "\C-p") 'company-select-previous)
@@ -165,12 +162,9 @@
  '(custom-safe-themes
    (quote
     ("4e5e58e42f6f37920b95a8502f488928b3dab9b6cc03d864e38101ce36ecb968" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(package-selected-packages
    (quote
-    (go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit elpy material-theme))))
+    (go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
