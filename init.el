@@ -147,6 +147,10 @@
 (setq python-shell-interpreter "/usr/local/bin/python")
 (setq flycheck-flake8rc "/usr/local/bin/flake8")
 
+;; JS
+(setq json-reformat:indent-width 2)
+(setq js-indent-level 2)
+
 ;; flycheck-mode
 (require 'flycheck)
 (global-flycheck-mode)
