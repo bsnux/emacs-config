@@ -30,8 +30,6 @@
 ;; Enable line numbers globally
 (global-linum-mode t)
 
-(menu-bar-mode 0)
-
 (setq vc-follow-symlinks t)
 
 ;; No backup files
@@ -145,6 +143,18 @@
 ;; Asking for confirmation before closing Emacs
 (setq confirm-kill-emacs 'y-or-n-p)
 
+;; Python
+(setq python-shell-interpreter "/usr/local/bin/python")
+(setq flycheck-flake8rc "/usr/local/bin/flake8")
+
+;; flycheck-mode
+(require 'flycheck)
+(global-flycheck-mode)
+
+;; Ensure env vars inside Emacs look the same as in the user's shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
@@ -158,7 +168,7 @@
     ("4e5e58e42f6f37920b95a8502f488928b3dab9b6cc03d864e38101ce36ecb968" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
  '(package-selected-packages
    (quote
-    (go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
+    (exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
