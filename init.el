@@ -115,6 +115,16 @@
 (global-set-key (kbd "s-[") 'indent-rigidly-right-to-tab-stop)
 (global-set-key (kbd "s-]") 'indent-rigidly-left-to-tab-stop)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
+(global-set-key (kbd "s-o") 'ido-find-file)
+(global-set-key (kbd "s-w") 'kill-this-buffer)
+
+;; Addding new line below
+(defun newline-without-break-of-line ()
+  (interactive)
+  (let ((oldpos (point)))
+    (end-of-line)
+    (newline-and-indent)))
+(global-set-key (kbd "<s-return>") 'newline-without-break-of-line)
 
 ;; Golang
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
