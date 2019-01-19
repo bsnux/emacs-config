@@ -117,6 +117,8 @@
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "s-o") 'ido-find-file)
 (global-set-key (kbd "s-w") 'kill-this-buffer)
+(global-set-key (kbd "<s-right>") 'next-buffer)
+(global-set-key (kbd "<s-left>") 'previous-buffer)
 
 ;; Addding new line below
 (defun newline-without-break-of-line ()
