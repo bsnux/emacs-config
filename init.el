@@ -171,6 +171,10 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+;; Word-wrapping for org-mode
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
