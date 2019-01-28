@@ -175,6 +175,15 @@
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+;; flycheck-rust
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;; Insert current date
+(defun timestamp ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %I:%M%p %Z")))
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
@@ -188,7 +197,7 @@
     ("4e5e58e42f6f37920b95a8502f488928b3dab9b6cc03d864e38101ce36ecb968" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
+    (flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
