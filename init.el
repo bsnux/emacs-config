@@ -22,6 +22,9 @@
 ;; Hide the startup message
 (setq inhibit-startup-message t)
 
+; No tool-bar. menu-bar still visible
+(tool-bar-mode -1)
+
 ;; Color theme
 (load-theme 'atom-one-dark t)
 (set-frame-parameter nil 'background-mode 'dark)
@@ -90,6 +93,11 @@
       (lambda ()
         (set (make-local-variable 'company-backends) '(company-go))
         (company-mode)))
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 ;; Overwrite selected region when pasting code
 (delete-selection-mode 1)
@@ -175,9 +183,21 @@
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
-;; flycheck-rust
+;; Rust
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(setq rust-format-on-save t)
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+;; Rust auto-completion provided by `racer' + `company`
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
+
+;; smart-mode-line
+(setq sml/theme 'light)
+(sml/setup)
 
 ;; Insert current date
 (defun timestamp ()
@@ -192,12 +212,23 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#21252B" "#E06C75" "#98C379" "#E5C07B" "#61AFEF" "#C678DD" "#56B6C2" "#ABB2BF"])
  '(custom-safe-themes
    (quote
-    ("4e5e58e42f6f37920b95a8502f488928b3dab9b6cc03d864e38101ce36ecb968" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
+    ("bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "4e5e58e42f6f37920b95a8502f488928b3dab9b6cc03d864e38101ce36ecb968" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" default)))
+ '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme))))
+    (racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf color-theme-solarized evil multiple-cursors better-defaults magit material-theme)))
+ '(tetris-x-colors
+   [[229 192 123]
+    [97 175 239]
+    [209 154 102]
+    [224 108 117]
+    [152 195 121]
+    [198 120 221]
+    [86 182 194]]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
