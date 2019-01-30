@@ -204,6 +204,18 @@
   (interactive)
   (insert (format-time-string "%Y-%m-%d %I:%M%p %Z")))
 
+;; Duplicate line
+(defun duplicate-line()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank)
+)
+(global-set-key (kbd "C-S-d") 'duplicate-line)
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
