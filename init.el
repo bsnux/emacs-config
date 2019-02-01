@@ -128,8 +128,16 @@
 (global-set-key (kbd "<s-right>") 'next-buffer)
 (global-set-key (kbd "<s-left>") 'previous-buffer)
 
-;; Addding new line below
+(defun mark-current-word()
+  "Mark current word."
+  (interactive)
+  (backward-word)
+  (mark-word)
+  )
+(global-set-key (kbd "M-d") 'mark-current-word)
+
 (defun newline-without-break-of-line ()
+  "Addding new line below."
   (interactive)
   (let ((oldpos (point)))
     (end-of-line)
@@ -140,6 +148,7 @@
 (setenv "GOPATH" "/Users/arturofernandez/dev/go")
 (add-to-list 'exec-path "/Users/arturofernandez/dev/go/bin")
 (defun my-go-mode-hook ()
+  "Hook for go-mode files."
   ; Use goimports instead of go-fmt
   (setq gofmt-command "goimports")
   ; Call Gofmt before saving
@@ -200,13 +209,13 @@
 (setq sml/theme 'light)
 (sml/setup)
 
-;; Insert current date
 (defun timestamp ()
+  "Insert current date."
   (interactive)
   (insert (format-time-string "%Y-%m-%d %I:%M%p %Z")))
 
-;; Duplicate line
 (defun duplicate-line()
+  "Duplicate current line."
   (interactive)
   (move-beginning-of-line 1)
   (kill-line)
@@ -216,6 +225,10 @@
   (yank)
 )
 (global-set-key (kbd "C-S-d") 'duplicate-line)
+
+;; Turn on highlighting current line
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#424242")
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
