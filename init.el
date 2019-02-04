@@ -230,6 +230,10 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "#424242")
 
+;; Dash (https://kapeli.com/dash)
+(autoload 'dash-at-point "dash-at-point"
+          "Search the word at point with Dash." t nil)
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
@@ -246,7 +250,7 @@
  '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
+    (dash-at-point solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
