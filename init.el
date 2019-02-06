@@ -1,7 +1,14 @@
-;; init.el --- Emacs configuration
+;;; init.el --- Emacs configuration
 
+;; Author: Arturo Fernandez
+;; URL: https://github.com/bsnux/emacs-config
+;; Keywords: configuration
+
+;;; Commentary:
 ;; This configuration file has been optimized to be used with XEmacs for
-;; macOS
+;; macOS 10.x
+
+;;; Code:
 
 ;; INSTALL PACKAGES
 ;; --------------------------------------
@@ -207,6 +214,7 @@
 
 ;; smart-mode-line
 (setq sml/theme 'light)
+(setq sml/no-confirm-load-theme t)
 (sml/setup)
 
 (defun timestamp ()
@@ -227,12 +235,19 @@
 (global-set-key (kbd "C-S-d") 'duplicate-line)
 
 ;; Turn on highlighting current line
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "#424242")
+;;(global-hl-line-mode 1)
+;;(set-face-background 'hl-line "#424242")
 
 ;; Dash (https://kapeli.com/dash)
 (autoload 'dash-at-point "dash-at-point"
-          "Search the word at point with Dash." t nil)
+  "Search the word at point with Dash." t nil)
+
+;; Ruby
+;;   M-x inf-ruby
+;;   M-x robe-start
+(add-hook 'ruby-mode-hook 'robe-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
 
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
@@ -250,7 +265,7 @@
  '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (dash-at-point solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
+    (rubocop robe dash-at-point solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
