@@ -52,6 +52,7 @@
 ;; Multiple-cursors
 (global-set-key (kbd "C-c m c") 'mc/edit-lines)
 (global-set-key (kbd "<M-s-down>") #'mc/mark-next-like-this)
+(global-set-key (kbd "s-d") #'mc/mark-next-like-this)
 (global-set-key (kbd "<M-s-up>") #'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c ,") 'mc/mark-all-like-this)
 
@@ -249,6 +250,9 @@
 (eval-after-load 'company
   '(push 'company-robe company-backends))
 
+(add-to-list 'auto-mode-alist '(".*Dockerfile.*\\'"  . dockerfile-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
 ;; Packages in `package-selected-packages` can be installed by
 ;; `package-install-selected-packages` command
 
@@ -265,7 +269,7 @@
  '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (rubocop robe dash-at-point solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
+    (nginx-mode rubocop robe dash-at-point solarized-theme racer smart-mode-line yasnippet-snippets flycheck-rust rust-mode exec-path-from-shell flycheck go-snippets json-mode company-go expand-region dockerfile-mode yaml-mode company-shell company-nginx git-gutter+ go-mode atom-one-dark-theme markdown-mode editorconfig groovy-mode railscasts-theme gruvbox-theme yasnippet py-yapf evil multiple-cursors better-defaults magit material-theme)))
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
