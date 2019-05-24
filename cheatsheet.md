@@ -120,9 +120,9 @@ used by *Emacs*
 
 ## Tramp
 
-**/sudo::** => Open a file as *root*
+**/sudo:/etc/passwd** => Open `/etc/passwd` file as *root*
 
-**/user@server:** => Open a remote shell for editing files
+**/ssh:user@server:** => Open a remote shell for editing files
 
 ## Coding
 
@@ -155,6 +155,12 @@ used by *Emacs*
 ## Version control/git
 
 C-x v g: Display who changed what (`blame`)
+
+## Executing ELISP code from terminal
+
+```
+$ emacs --script /tmp/test.el
+```
 
 ## Misc
 
