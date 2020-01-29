@@ -29,5 +29,6 @@ $ ln -s better-defaults.ini ~/.emacs.d/init.el
 On *macOs* you should use [Emacs Plus](https://github.com/d12frosted/homebrew-emacs-plus):
 
 ```
+$ brew tap d12frosted/emacs-plus
 $ brew install emacs-plus
 ```
