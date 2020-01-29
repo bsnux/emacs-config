@@ -14,7 +14,10 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
-(setq doom-theme 'base16-ocean)
+
+(if window-system
+    (setq doom-theme 'base16-ocean)
+    (setq doom-theme 'doom-one))
 
 ;; If you intend to use org, it is recommended you change this!
 (setq org-directory "~/org/")
@@ -47,5 +50,11 @@
 ;; Word wrapping
 (global-visual-line-mode 1)
 
-; Multiple cursors
+;; Multiple cursors
 (global-set-key (kbd "s-d") 'evil-multiedit-match-symbol-and-next)
+
+;; Find in files
+(global-set-key (kbd "s-f") 'helm-projectile-ack)
+
+;; Setting custom background color
+(set-background-color "#383c45")
