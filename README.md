@@ -6,7 +6,7 @@ Set of configuration files for [Emacs](https://www.emacs.org):
 * `better-defaults.el`: No packages and ready to use in terminal and GUI.
 * `init.el`: Generic file with packages and ready to use in terminal and GUI.
 * `doom`: Directory for configuration files for [Doom Emacs](https://github.com/hlissner/doom-emacs)
-
+* `devops-init.el`: Configuration for console emacs + GUI Emacs on macOS. Specific for DevOps
 
 ## Installation
 
