@@ -116,6 +116,7 @@
 (use-package terraform-mode
   :ensure t)
 
+;; Auto-complete compatible w/ eglot
 (use-package company
   :config
   (global-company-mode t)
@@ -134,7 +135,26 @@
 (use-package rust-mode
   :ensure t)
 
-(load-theme 'dracula t)
+;; This allows us to use flycheck instead of flymake w/ eglot
+(use-package flycheck-eglot
+  :ensure t)
+
+(global-flycheck-eglot-mode 1)
+
+(use-package magit
+  :bind
+  ("C-x g" . magit-status)
+  :ensure t)
+
+(use-package kaolin-themes
+  :ensure t)
+
+(use-package nord-theme
+  :ensure t)
+
+;(load-theme 'dracula t)
+;(load-theme 'kaolin-ocean t)
+(load-theme 'nord t)
 (xterm-mouse-mode t)
 (evil-mode 1)
 (global-company-mode t)
@@ -146,6 +166,15 @@
 (add-hook 'terraform-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(rust-mode "/Users/arturo.fernandez/.cargo/bin/rust-analyzer"))
 (add-to-list 'eglot-server-programs '(terraform-mode "~/.local/bin/terraform-eglot.sh"))
+(add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "deno" "lsp")))
+
+(defclass eglot-deno (eglot-lsp-server) ()
+  :documentation "A custom class for deno lsp.")
+
+(cl-defmethod eglot-initialization-options ((server eglot-deno))
+  "Passes through required deno initialization options"
+  (list :enable t
+        :lint t))
 
 (require 'ido)
 (ido-mode 1)
